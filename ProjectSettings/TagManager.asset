@@ -4,12 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Floor6
-  - Floor5
-  - Floor4
-  - Floor3
-  - Floor2
-  - Floor1
+  - Undefined
+  - StageClear
+  - Mines
+  - Gold
   layers:
   - Default
   - TransparentFX

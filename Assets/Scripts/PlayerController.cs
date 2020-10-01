@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10;
-    public static float bottomY = -110f;
+    public static float bottomY = -10f;
 
     private Rigidbody rb;
 
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(this.gameObject);
             //destroy fuction removes things that are passed into it from the game
-            SceneManager.LoadScene("FallOff_Stage1");
+            SceneManager.LoadScene("EscapeMineField");
         }
     }
 
@@ -44,6 +44,20 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("StageClear"))
+        {
+            other.gameObject.SetActive(false);
+            SceneManager.LoadScene("EscapeMineField");
+        }
+        if (other.gameObject.CompareTag("Mines"))
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("EscapeMineField");
+        }
     }
 
 }
