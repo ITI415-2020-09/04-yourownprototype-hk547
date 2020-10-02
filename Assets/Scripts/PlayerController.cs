@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public static float bottomY = -10f;
 
     private Rigidbody rb;
+    public Text scoreGT;
 
     private float movementX;
     private float movementY;
@@ -18,6 +20,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        GameObject scoreGo = GameObject.Find("Score");
+        scoreGT = scoreGo.GetComponent<Text>();
+        scoreGT.text = "0";
 
     }
 
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,6 +65,23 @@ public class PlayerController : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene("EscapeMineField");
         }
-    }
+        if (other.gameObject.CompareTag("MvMine1"))
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("EscapeMineField");
+        }
+        if (other.gameObject.CompareTag("Gold"))
+        {
+            other.gameObject.SetActive(false);
 
+            int score = int.Parse(scoreGT.text);
+            score += 100;
+            scoreGT.text = score.ToString();
+
+            if (score > HighScore.score)
+            {
+                HighScore.score = score;
+            }
+        }
+    }
 }

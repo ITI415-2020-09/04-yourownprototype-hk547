@@ -8,6 +8,16 @@ TagManager:
   - StageClear
   - Mines
   - Gold
+  - MvMine1
+  - Score
+  - HighScore
+  - Stage
+  - 6
+  - 5
+  - 4
+  - 3
+  - 2
+  - 1
   layers:
   - Default
   - TransparentFX
